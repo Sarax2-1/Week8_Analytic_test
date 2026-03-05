@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class UGSInitializer : MonoBehaviour
 {
+    public static bool IsReady = false;
+
     async void Awake()
     {
         await UnityServices.InitializeAsync();
-        Debug.Log("UGS Initialized");
+        IsReady = true;
+        Debug.Log("UGS READY");
     }
 }

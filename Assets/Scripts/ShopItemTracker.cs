@@ -39,11 +39,11 @@ public class ShopItemTracker : MonoBehaviour,
 
     void SendEvent(string result, float duration)
     {
-        Debug.Log("ANALYTICS DEBUG");
-        Debug.Log("Item: " + itemCode);
-        Debug.Log("Result: " + result);
-        Debug.Log("Duration: " + duration);
-        Debug.Log("Price: " + price);
+        if (!UGSInitializer.IsReady)
+        {
+            Debug.LogError("UGS NOT READY YET");
+            return;
+        }
 
         var e = new IapInterestEvent();
 
@@ -55,6 +55,6 @@ public class ShopItemTracker : MonoBehaviour,
         AnalyticsService.Instance.RecordEvent(e);
         AnalyticsService.Instance.Flush();
 
-        Debug.Log("Sending Event:" + result + "|" + duration);
+        Debug.Log("EVENT SENT");
     }
 }
